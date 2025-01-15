@@ -13,6 +13,7 @@ type Memo = {
 const App: React.FC = () => {
   const [memos, setMemos] = useState<Memo[]>([]);
   const [editingMemo, setEditingMemo] = useState<Memo | null>(null);
+  const [formKey, setFormKey] = useState(0);
 
   // ローカルストレージからメモを読み込む
   useEffect(() => {
@@ -51,6 +52,13 @@ const App: React.FC = () => {
     setEditingMemo(null);
   };
 
+  // メモ削除とフォームクリア
+  const deleteMemoAndClearForm = (id: number) => {
+    deleteMemo(id);
+    setFormKey(prevKey => prevKey + 1);
+    setEditingMemo(null);
+  };
+
   return (
     <>
     
@@ -66,12 +74,13 @@ const App: React.FC = () => {
         <Box w="25%">
           <MemoList
             memos={memos}
-            onDelete={deleteMemo}
+            onDelete={deleteMemoAndClearForm}
             onEdit={setEditingMemo}
           />
         </Box>
         <Box flex="1">
           <MemoForm
+            key={formKey}
             onAddMemo={addMemo}
             editingMemo={editingMemo}
             onEditMemo={editMemo}

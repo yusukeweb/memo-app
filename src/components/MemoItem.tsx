@@ -19,6 +19,12 @@ const MemoItem: React.FC<MemoItemProps> = ({
     onDelete,
     onEdit
 }) => {
+    const handleDelete = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        onDelete(memo.id);
+    };
+
+
     return (
         <Stack 
 
@@ -32,7 +38,7 @@ const MemoItem: React.FC<MemoItemProps> = ({
                     {/* <button onClick={() => onEdit(memo)}>編集</button> */}
                 </Box>
                 <Button 
-                onClick={() => onDelete(memo.id)}
+                onClick={handleDelete}
                 w="20%"
                 size="xs"
                 >削除</Button>
