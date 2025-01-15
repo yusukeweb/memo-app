@@ -87,9 +87,10 @@ const MemoForm: React.FC<MemoFormProps> = ({
                 type='submit'>
                     {editingMemo ? '更新' : '追加'}
                 </Button>
-                <Button fontSize="30px">
+                {/* <Button 
+                fontSize="30px">
                     +
-                </Button>
+                </Button> */}
             </Flex>
         </form>
     );
